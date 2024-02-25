@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='image1.jpg') }}"); /* Replace 'background.jpg' with your image file path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center items horizontally */
+            height: 100vh;
+        }
+
+        header {
+            margin-top: 70px; /* Adjust margin-top for spacing */
+        }
+
+        #search-form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px; /* Adjust margin-top for spacing */
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px; /* Adjust margin-bottom for spacing between form elements */
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">CIRCLEUP</a>
+        </nav>
+    </header>
+    <section id="search-form">
+        <h2 class="mt-4">Search Users</h2>
+        <form action="{{ url_for('search') }}" method="post">
+            <div class="form-group">
+                <label for="search_query">Search by Username:</label>
+                <input type="text" class="form-control" id="search_query" name="search_query" placeholder="Enter username" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>

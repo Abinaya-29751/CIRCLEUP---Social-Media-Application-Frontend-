@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Social Media App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("{{ url_for('static', filename='image1.jpg') }}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Adding a semi-transparent white background for better readability */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%; /* Set the input width to 100% */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group p {
+            margin-top: 10px; /* Added margin between paragraphs */
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .center {
+            text-align: center;
+        }
+        h1 {
+            text-align: center; /* Center align the heading */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section id="registration">
+            <h1 class="center">REGISTER</h1>
+            <form id="registration-form" method="post" action="{{ url_for('register') }}">
+                <div class="form-group">
+                    <label for="reg-username">Username</label>
+                    <input type="text" class="form-control" id="reg-username" name="username" style="width: 100%;" required> <!-- Set the width inline -->
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" class="form-control" id="reg-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" class="form-control" id="reg-email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <div>
+                <p class="center">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

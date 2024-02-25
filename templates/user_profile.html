@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='image1.jpg') }}"); /* Background image */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for the container */
+        }
+        #user-profile {
+    margin: 0 auto; /* Center the section horizontally */
+    width: 80%; /* Adjust the width of the section as needed */
+    max-width: 600px; /* Set a maximum width for responsiveness */
+    text-align: center; /* Center-align the content inside the section */
+}
+        .user-posts {
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for posts */
+            border-radius: 10px;
+
+        }
+        .user-posts li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc; /* Border for each post */
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            text-align:left /* Background color for each post */
+        }
+        .user-posts li:last-child {
+            margin-bottom: 0; /* Remove bottom margin for the last post */
+        }
+        .profile-picture {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">CIRCLEUP</a>
+        </nav>
+    </header>
+     
+    <div class="container">
+        <section id="user-profile">
+            <h2 class="mt-4">Profile</h2>
+            <div class="profile-details">
+                <img src="{{ url_for('static', filename='image3.jpg') }}" alt="Profile Picture" class="profile-picture"> <!-- Profile picture -->
+                <p><strong>Username:</strong> {{ user[1] }}</p>
+                <p><strong>Email:</strong> {{ user[3] }}</p>
+                <!-- Add more user details here if needed -->
+            </div>
+
+            <h2 class="mt-4">Posts</h2>
+            <div class="user-posts">
+                {% if user_posts %}
+                    <ul>
+                        {% for post in user_posts %}
+                            <li>{{ post[0] }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No posts found for this user.</p>
+                {% endif %}
+            </div>
+              
+        </section>
+    </div>
+    <div class="container">
+        <section id="user-profile">
+            <!-- User profile and details content -->
+    
+            <!-- Button to go to home page -->
+            <a href="{{ url_for('home', user_id=current_user.id) }}" class="btn btn-primary">🏠 Go to Home Page</a>
+        </section>
+    </div> 
+</body>
+</html>

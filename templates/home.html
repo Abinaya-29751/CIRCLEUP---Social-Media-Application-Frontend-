@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Add Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Additional CSS styles */
+        body {
+            background-image: url("{{ url_for('static', filename='image1.jpg') }}"); /* Replace 'image1.jpg' with your image file path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+        header {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent black background */
+            color: rgb(9, 9, 9);
+            text-align: center;
+            padding: 10px 0;
+        }
+        #home-heading {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        header ul {
+            list-style: none;
+            padding: 0;
+        }
+        header ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        #add-post {
+            position: absolute;
+            top: 40%;
+            left: 20%;
+            transform: translate(-50%, -50%);
+            width: 300px; /* Adjust width as needed */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #view-posts {
+            margin-top: 30px; /* Add margin-top to create space for the add post section */
+            margin-right: 20px; /* Add margin-right to prevent overlapping with the add post section */
+            float: right;
+            width: 60%; /* Adjust width as needed */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #posts-container .card {
+            margin-bottom: 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            width: 100%;
+            padding-left: 10px;
+            position: relative; /* Add position relative for absolute positioning of like/dislike buttons */
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color:  #1c3147;
+            border: none;
+            border-radius: 7px;
+        }
+
+        .button:hover {
+            background-color: #1c3147;
+        }
+
+        /* Positioning for like and dislike buttons */
+        .like-button {
+            position: absolute;
+            bottom: 10px;
+            right: 110px;
+        }
+
+        .dislike-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        /* Set font size for consistency */
+        .card-body {
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="home-heading">HOME</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('profile') }}" class="button">View Profile</a></li>
+                <li><a href="{{ url_for('search') }}" class="button">Search</a></li>
+                <li><a href="{{ url_for('logout') }}" class="button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="view-posts">
+        <h2 class="mt-4">POSTS</h2>
+        <div id="posts-container" class="mt-3">
+            {% for post, username in user_posts %}
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Posted by: {{ username }}</h4>
+                        <p class="card-text">{{ post }}</p>
+                        <!-- Like and Dislike buttons -->
+                        <button class="like-button" onclick="incrementLikes(this)">&#128077; Like</button>
+                        <button class="dislike-button" onclick="incrementDislikes(this)"><i class="fas fa-thumbs-down"></i> Dislike</button>
+                        <span class="like-count">0</span> Likes <!-- Like count -->
+                        <span class="dislike-count">0</span> Dislikes <!-- Dislike count -->
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="add-post">
+        <div class="container">
+            <h2>Add Post</h2>
+            <form id="add-post-form" method="post" action="{{ url_for('add_post') }}" enctype="multipart/form-data">
+                <input type="hidden" name="user_id" value="{{ user_id }}">
+                <div class="form-group" style="margin-bottom: 10px;"> <!-- Add margin bottom for spacing -->
+                    <input type="file" name="image" accept="image/*" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px;"> <!-- Add margin bottom for spacing -->
+                    <textarea id="post-content" class="form-control" name="post" rows="3" placeholder="Write your caption here" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Post</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- JavaScript for incrementing likes and dislikes -->
+    <script>
+        function incrementLikes(button) {
+            var likeCount = button.parentElement.querySelector('.like-count');
+            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+        }
+
+        function incrementDislikes(button) {
+            var dislikeCount = button.parentElement.querySelector('.dislike-count');
+            dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
+        }
+    </script>
+</body>
+</html>

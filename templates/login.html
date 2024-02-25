@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Social Media App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='image1.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Adding a semi-transparent white background for better readability */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Center align the text content within the container */
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        h1 {
+            text-align: center; /* Center align the heading */
+        }
+        header {
+            text-align: center; /* Center align content within the header */
+            margin-bottom: 20px; /* Add margin bottom for spacing */
+        }
+
+        header h1 {
+            font-size: 28px; /* Adjust font size as needed */
+            color: #f4f0f0; /* Change font color if needed */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">CIRCLEUP</a>
+        </nav>
+    </header>
+    <div class="container">
+        <section id="login">
+            <b><h1>LOGIN</h1></b>
+            <form id="login-form" method="post" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" class="form-control" id="login-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" class="form-control" id="login-password" name="password" required>
+                </div>
+                <h1><button type="submit" class="btn btn-primary">Login</button></h1>
+            </form>
+            <div>
+                <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

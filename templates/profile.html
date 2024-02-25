@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Additional CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='image1.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        header {
+    background-color:rgba(255, 255, 255, 0.8);; /* Dark background color for the header */
+    color: rgb(254, 247, 247); /* White text color for the header */
+    text-align: center;
+    padding: 10px 0;
+    position: fixed; /* Fixed positioning to keep the header at the top */
+    width: 100%; /* Full width */
+    top: 0; /* Stick to the top */
+    left: 0; /* Align to the left */
+}
+        #user-details {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 40px; /* Increase the padding to make the box bigger */
+    border-radius: 20px; /* Increase the border radius for rounded corners */
+    text-align: center; /* Center-align the user details section */
+    margin-top: 50px; /* Add margin to center the content vertically */
+    max-width: 600px; /* Set a maximum width for the box */
+    margin: 0 auto; /* Center the box horizontally */
+}
+        
+        #user-details img {
+            border-radius: 50%; /* Apply border-radius to create a circular image */
+            width: 150px; /* Set the width of the image */
+            height: 150px; /* Set the height of the image */
+            object-fit: cover; /* Ensure the image covers the entire container */
+            margin-bottom: 20px; /* Add margin at the bottom of the image */
+        }
+        .edit-form {
+    display: none;
+    position: fixed; /* Fixed positioning */
+    top: 50%; /* Align to the vertical center */
+    left: 10%; /* Align to the left side */
+    transform: translate(-50%, -50%); /* Center the form vertically */
+    background-color: rgba(255, 255, 255, 0.8);; /* Background color for the form */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow for a subtle effect */
+}
+.edit-form form label,
+.edit-form form input {
+    display: block;
+    margin-bottom: 10px; /* Add margin-bottom to create space between each option */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">CIRCLEUP</a>
+        </nav>
+    </header>
+
+    <section id="user-details">
+        <h2 class="mt-4">User Profile</h2>
+        <div class="mt-3">
+            <img src="{{ url_for('static', filename='image3.jpg') }}" alt="Profile Image"> <!-- Add profile image -->
+            <p><strong>Username:</strong> {{ user_details.username }}</p>
+            <p><strong>Email:</strong> {{ user_details.email }}</p>
+            <!-- Add more details here -->
+
+            <!-- Edit Profile Button -->
+            <button onclick="toggleEditForm()">Edit Profile</button>
+             <!-- Home Button -->
+             <button onclick="window.location.href = 'http://127.0.0.1:5000/home/1'">
+                Home &#127968; <!-- Home symbol -->
+            </button>
+        </div>
+    </section>
+
+    <!-- Edit Profile Form -->
+    <section id="edit-profile-form" class="edit-form">
+        <h2>Edit Profile</h2>
+        <form id="edit-profile" method="post">
+            <label for="new_username">New Username:</label><br>
+            <input type="text" id="new_username" name="new_username" required><br>
+
+            <label for="new_password">New Password:</label><br>
+            <input type="password" id="new_password" name="new_password" required><br>
+            <label for="profile_photo">Profile Photo:</label><br>
+            <input type="file" id="profile_photo" name="profile_photo"><br><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </section>
+
+<script>
+    function toggleEditForm() {
+        var editForm = document.getElementById('edit-profile-form');
+        if (editForm.style.display === 'none') {
+            editForm.style.display = 'block';
+        } else {
+            editForm.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
